@@ -1,9 +1,10 @@
-const mongoose = require('mongoose'),
-  express = require('express'),
-  router = express.Router();
+var express=require('express');
+var bodyParser=require('body-parser');
 
-  
-const productSchema = require('../Models/Product');
+var router=express.Router();
+router.use(bodyParser.urlencoded({extended:true}));
+router.use(bodyParser.json());
+var productSchema = require('../Models/Product');
 
 //POST
 router.route('/products').post((req, res, next) => {

@@ -1,11 +1,13 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+var express=require('express');
+var bodyParser=require('body-parser');
 
-const Cart = require('../Models/Cart');
-const requireLogin = require('../middleware/requireLogin');
+var router=express.Router();
+router.use(bodyParser.urlencoded({extended:true}));
+router.use(bodyParser.json());
+var Cart = require('../Models/Cart');
+var requireLogin = require('../middleware/requireLogin');
+var jsonParser=bodyParser.json();
 
-const router = express.Router();
-const jsonParser = bodyParser.json();
 
 router.post('/cart', requireLogin, jsonParser, (req, res) => {
   const user = req.body.user;
