@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
- const Schema = mongoose.Schema;
+var mongoose = require('mongoose');
+ var Schema = mongoose.Schema;
  
  // List of columns for product schema
- let productSchema = new Schema({
+ var productSchema = new Schema({
        
     
     title : {
@@ -20,5 +20,5 @@ const mongoose = require('mongoose');
  },{
     collection: 'products'
     });
-    
-    module.exports = mongoose.model('Product', productSchema);
+    var userproduct=mongoose.model('userproduct',productSchema);
+module.exports=userproduct;
