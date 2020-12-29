@@ -2,11 +2,11 @@ const express=require('express');
 const mongoose=require('mongoose');
 const cors=require('cors');
 const app=express();
-const productController=require('./Controllers/productController.js')
-const userController=require('./Controllers/userController.js');
-const cartController=require('./Controllers/cartController.js');
+const productController=require('./src/Controllers/productController.js')
+const userController=require('./src/Controllers/userController.js');
+const cartController=require('./src/Controllers/cartController.js');
 
-const config=require('./Config');
+const config=require('./src/Config');
 app.set('port',4000);
 app.use(cors());
 app.use('/user',userController);
