@@ -1,6 +1,6 @@
-var config=require('./config.json');
+require('dotenv').config()
 module.exports={
     getDbConnectionString:()=>{
-        return 'mongodb://localhost:27017/ShoppingCart';
+        return process.env.mongodbUrl||"";
     }
 }
