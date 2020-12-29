@@ -1,10 +1,10 @@
-var express=require('express');
-var bodyParser=require('body-parser');
+const express=require('express');
+const bodyParser=require('body-parser');
 
-var router=express.Router();
+const router=express.Router();
 router.use(bodyParser.urlencoded({extended:true}));
 router.use(bodyParser.json());
-var productSchema = require('../Models/Product');
+const productSchema = require('../Models/Product');
 
 //POST
 router.route('/products').post((req, res, next) => {
