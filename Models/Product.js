@@ -19,6 +19,6 @@ var mongoose = require('mongoose');
     },
  },{
     collection: 'products'
-    });
+    },'product');
     var userproduct=mongoose.model('userproduct',productSchema);
 module.exports=userproduct;

@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
-var Schema=mongoose.Schema;
 
-var cartSchema = new Schema({
+var cartSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
@@ -17,5 +16,4 @@ var cartSchema = new Schema({
   ]
 });
 
-var usercart=mongoose.model('usercart',cartSchema);
-module.exports=usercart;
+module.exports = mongoose.model('Cart', cartSchema);
