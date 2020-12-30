@@ -1,13 +1,72 @@
-import productController from '../Controllers/productController';
+const request = require('supertest');
+const app = require('../Models/Product.js');
 
+describe('Post Endpoints', () => {
+    it('should create a new post', async () => {
+        const res = await request(app)
+            .post('/api/posts')
+            .send({
+                userId: 1,
+                title: "",
+                price: "",
+                description: "",
+                imageUrl: "",
+            });
+        expect(res.statusCode).toEqual(201);
+        expect(res.body).toHaveProperty('post');
+    });
 
-const mockProductSchema = jest.fn();
+    it('should fetch a single post', async () => {
+        const postId = 1;
+        const res = await request(app).get(`/api/posts/${postId}`);
+        expect(res.statusCode).toEqual(200);
+        expect(res.body).toHaveProperty('post');
+    });
 
-jest.mock('../Controllers/productController', () =>{
-return jest.fn().mockImplementation(() =>{
+    it('should fetch all posts', async () => {
+        const res = await request(app).get('/api/posts');
+        expect(res.statusCode).toEqual(200);
+        expect(res.body).toHaveProperty('posts');
+        expect(res.body.posts).toHaveLength(1);
+    });
 
+    it('should update a post', async () => {
+        const res = await request(app)
+            .put('/api/posts/1')
+            .send({
+                userId: 1,
+                title: "",
+                price: "",
+                description: "",
+                imageUrl: "",
+            });
 
-return {productSchema : mockProductSchema };
+        expect(res.statusCode).toEqual(200);
+        expect(res.body).toHaveProperty('post');
+        expect(res.body.post).toHaveProperty('title', 'updated title');
+    });
 
-});
+    it('should return status code 500 if db constraint is violated', async () => {
+        const res = await request(app)
+            .post('/api/posts')
+            .send({
+                title: "",
+                price: "",
+                description: "",
+                imageUrl: "",
+            });
+        expect(res.statusCode).toEqual(500);
+        expect(res.body).toHaveProperty('error');
+    });
+
+    it('should delete a post', async () => {
+        const res = await request(app).delete('/api/posts/1');
+        expect(res.statusCode).toEqual(204);
+    });
+
+    it('should respond with status code 404 if resource is not found', async () => {
+        const postId = 1;
+        const res = await request(app).get(`/api/posts/${postId}`);
+        expect(res.statusCode).toEqual(404);
+    });
 });
