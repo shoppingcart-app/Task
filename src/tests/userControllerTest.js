@@ -7,7 +7,7 @@ jest.mock('../Controllers/userController', () =>{
 return jest.fn().mockImplementation(() =>{
 
 
-return {userSchema : mockSchema };
+return {userSchema : mockUserSchema };
 
 });
 });
