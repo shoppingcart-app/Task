@@ -9,9 +9,9 @@ const cartController=require('./src/Controllers/cartController.js');
 const config=require('./src/Config');
 app.set('port',4000);
 app.use(cors());
-app.use('/user',userController);
-app.use('/product',productController);
-app.use('/cart',cartController);
+app.use('/api',userController);
+app.use('/api',productController);
+app.use('/api',cartController);
 
 mongoose.connect(config.getDbConnectionString(),{useCreateIndex:true,useNewUrlParser:true,useUnifiedTopology:true,useFindAndModify:false});
 const db=mongoose.connection;
