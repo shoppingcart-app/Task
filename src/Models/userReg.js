@@ -1,6 +1,6 @@
-var mongoose=require('mongoose');
-var Schema=mongoose.Schema;
-var userRegSchema=new Schema({
+const mongoose=require('mongoose');
+const Schema=mongoose.Schema;
+const userRegSchema=new Schema({
     firstName:{required:true,type:String},
     lastName:{type:String,required:true},
     userName:{type:String,required:true,unique:true},
@@ -11,5 +11,5 @@ var userRegSchema=new Schema({
     city:{type:String,required:true},
     pincode:{type:Number,required:true}
 });
-var userReg=mongoose.model('userReg',userRegSchema);
+const userReg=mongoose.model('userReg',userRegSchema);
 module.exports=userReg;

@@ -1,10 +1,10 @@
-var express=require('express');
-var bodyParser=require('body-parser');
-var userReg=require('../Models/userReg.js');
-var config=require('../Config/secret');
-var jwt=require('jsonwebtoken');
-var bcrypt=require('bcryptjs');
-var router=express.Router();
+const express=require('express');
+const bodyParser=require('body-parser');
+const userReg=require('../Models/userReg.js');
+const config=require('../Config/secret');
+const jwt=require('jsonwebtoken');
+const bcrypt=require('bcryptjs');
+const router=express.Router();
 router.use(bodyParser.urlencoded({extended:true}));
 router.use(bodyParser.json());
 

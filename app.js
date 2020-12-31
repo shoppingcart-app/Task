@@ -1,17 +1,17 @@
-var express=require('express');
-var mongoose=require('mongoose');
-var cors=require('cors');
-var app=express();
-var productController=require('./Controllers/productController.js')
-var userController=require('./Controllers/userController.js');
-var cartController=require('./Controllers/cartController.js');
+const express=require('express');
+const mongoose=require('mongoose');
+const cors=require('cors');
+const app=express();
+const productController=require('./src/Controllers/productController.js')
+const userController=require('./src/Controllers/userController.js');
+const cartController=require('./src/Controllers/cartController.js');
 
-var config=require('./Config');
+const config=require('./src/Config');
 app.set('port',4000);
 app.use(cors());
-app.use('/user',userController);
-app.use('/product',productController);
-app.use('/cart',cartController);
+app.use('/api',userController);
+app.use('/api',productController);
+app.use('/api',cartController);
 
 mongoose.connect(config.getDbConnectionString(),{useCreateIndex:true,useNewUrlParser:true,useUnifiedTopology:true,useFindAndModify:false});
 const db=mongoose.connection;
