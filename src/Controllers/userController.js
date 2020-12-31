@@ -1,14 +1,9 @@
-const express=require('express');
-const bodyParser=require('body-parser');
 const userReg=require('../Models/userReg.js');
 const config=require('../Config/secret');
 const jwt=require('jsonwebtoken');
 const bcrypt=require('bcryptjs');
-const router=express.Router();
-router.use(bodyParser.urlencoded({extended:true}));
-router.use(bodyParser.json());
-
-router.post('/reg', (req,res)=>{
+ 
+const createUser = (req,res)  =>{
     const {firstName,lastName,userName,password,phnNo,address,state,city,pincode}=req.body;
     const newUser=userReg({firstName:firstName,lastName:lastName,userName:userName,password:bcrypt.hashSync(password, 8),phnNo:phnNo,address:address,state:state,city:city,pincode:pincode});
     userReg.findOne({userName:userName}).then((user)=>{
@@ -24,9 +19,9 @@ router.post('/reg', (req,res)=>{
            }).catch(err=>res.send({message:err.message}));
         }
     }).catch((err)=>res.send({message:err.message}));   
-});
-
-router.post('/login',(req,res)=>{
+}
+ 
+const userLogin = (req,res)  =>{
      userReg.findOne({userName:req.body.userName.trim()}).then((user)=>{
          if(user){
                 if(bcrypt.compareSync(req.body.password,user.password)){
@@ -43,15 +38,19 @@ router.post('/login',(req,res)=>{
         }
         
     }).catch((err)=>res.send({message:"Error in finding the user "}));
-});
-router.get('/getUser/:name',(req,res)=>{
+}
+ 
+const getAllUser = (req,res)  =>{
+ 
     userReg.find({userName:req.params.name}).then((result)=>{
             res.send(result);
     }).catch((err)=>{
         res.send(err);
     });
-});
-router.put('/updateDetails',(req,res)=>{
+}
+ 
+const updateUser = (req,res)  =>{
+ 
     userReg.findOne({userName:req.body.userName},(err,user)=>{
         if(err){
             res.send({success:false,message:"Not a valid user"});
@@ -74,7 +73,7 @@ router.put('/updateDetails',(req,res)=>{
             })
         }
     })
-})
-module.exports=router;
-
-
+}
+module.exports = {
+    createUser,userLogin,getAllUser,updateUser
+}
