@@ -1,22 +1,16 @@
-const express=require('express');
-const bodyParser=require('body-parser');
-
-const router=express.Router();
-router.use(bodyParser.urlencoded({extended:true}));
-router.use(bodyParser.json());
 const productSchema = require('../Models/Product');
 
 //POST
-router.route('/products').post((req, res, next) => {
-  productSchema.create(req.body, (error, data) => {
+const createProduct = (product ,callback)  =>{
+  productSchema.create(product, (error, data) => {
     if (error) {
-      return next(error)
+      return callback(error)
     } else {
-      console.log(data)
-      res.json(data)
+      return callback(null,data)
     }
   })
-});
+}
+
 
 //GET all
 router.route('/products').get((req, res) => {
@@ -30,14 +24,6 @@ router.route('/products').get((req, res) => {
   })
 })
 
-//GET one
-// router.route('/products/:id').get((req, res) => {
-//   productSchema.findById(req.params.id, (error, data) => {
-    
-//       res.json(data)
-//     })
-  
-// })
 
 router.route('/products/:id').get((req, res) => {
   productSchema.findById(req.params.id, (error, data) => {
@@ -67,4 +53,6 @@ router.route('/products/:id').delete((req, res, next) => {
 })
 
 
-module.exports = router;
+module.exports = { createProduct
+
+}
