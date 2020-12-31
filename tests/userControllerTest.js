@@ -1,10 +1,10 @@
 const request = require('supertest');
-const app = require('../Models/userReg.js');
+const app = require('../src/Models/userReg.js');
 
 describe('Post Endpoints', () => {
   it('should create a new post', async () => {
     const res = await request(app)
-      .post('/api/posts')
+      .post('/api/reg')
       .send({
         userId: 1,
     firstName:"Thejesh",
@@ -22,8 +22,8 @@ describe('Post Endpoints', () => {
   });
 
   it('should fetch a single post', async () => {
-    const postId = 1;
-    const res = await request(app).get(`/api/posts/${postId}`);
+    const regId = 1;
+    const res = await request(app).get(`/api/reg/${regId}`);
     expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty('post');
   });
@@ -37,7 +37,7 @@ describe('Post Endpoints', () => {
 
   it('should update a post', async () => {
     const res = await request(app)
-      .put('/api/posts/1')
+      .put('/api/reg/1')
       .send({
         userId: 1,
         firstName:"updated",
@@ -58,7 +58,7 @@ describe('Post Endpoints', () => {
 
   it('should return status code 500 if db constraint is violated', async () => {
     const res = await request(app)
-      .post('/api/posts')
+      .post('/api/reg')
       .send({
         firstName:"Thejesh",
         lastName:"Reddy",
@@ -75,13 +75,13 @@ describe('Post Endpoints', () => {
   });
 
   it('should delete a post', async () => {
-    const res = await request(app).delete('/api/posts/1');
+    const res = await request(app).delete('/api/reg/1');
     expect(res.statusCode).toEqual(204);
   });
 
   it('should respond with status code 404 if resource is not found', async () => {
-    const postId = 1;
-    const res = await request(app).get(`/api/posts/${postId}`);
+    const regId = 1;
+    const res = await request(app).get(`/api/posts/${regId}`);
     expect(res.statusCode).toEqual(404);
   });
 });

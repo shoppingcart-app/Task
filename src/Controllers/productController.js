@@ -1,70 +1,58 @@
-const express=require('express');
-const bodyParser=require('body-parser');
-
-const router=express.Router();
-router.use(bodyParser.urlencoded({extended:true}));
-router.use(bodyParser.json());
 const productSchema = require('../Models/Product');
 
 //POST
-router.route('/products').post((req, res, next) => {
-  productSchema.create(req.body, (error, data) => {
+const createProduct = (product ,callback)  =>{
+  productSchema.create(product, (error, data) => {
     if (error) {
-      return next(error)
+      return callback(error)
     } else {
-      console.log(data)
-      res.json(data)
+      return callback(null,data)
     }
   })
-});
+}
 
-//GET all
-router.route('/products').get((req, res) => {
-  productSchema.find((error, data) => {
+//GET ALL
+const getAllProduct = (product ,callback)  =>{
+  productSchema.find(product, (error, data) => {
     if (error) {
-      return next(error)
+      return callback(error)
     } else {
-      res.json(data)
-      console.log(data)
+      return callback(null,data)
     }
   })
-})
+}
 
-//GET one
-// router.route('/products/:id').get((req, res) => {
-//   productSchema.findById(req.params.id, (error, data) => {
-    
-//       res.json(data)
-//     })
-  
-// })
-
-router.route('/products/:id').get((req, res) => {
-  productSchema.findById(req.params.id, (error, data) => {
+//GET One
+const getOneProduct = (product ,callback)  =>{
+  productSchema.findById(product, (error, data) => {
     if (error) {
-      return next(error)
+      return callback(error)
     } else {
-      res.json(data)
+      return callback(null,data)
     }
   })
-})
+}
 
+const updateProduct = (product ,callback)  =>{
+  productSchema.findByIdAndUpdate(product, (error, data) => {
+    if (error) {
+      return callback(error)
+    } else {
+      return callback(null,data)
+    }
+  })
+}
 
-//UPDATE
-router.route('/products/:id').put((req, res, next) => {
-  productSchema.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, data) {
-    if (err) return next(err);
-    res.send('Product udpated.');
-});
-})
+const deleteProduct = (product ,callback)  =>{
+  productSchema.findByIdAndRemove(product, (error, data) => {
+    if (error) {
+      return callback(error)
+    } else {
+      return callback(null,data)
+    }
+  })
+}
 
-// Delete Product
-router.route('/products/:id').delete((req, res, next) => {
-  productSchema.findByIdAndRemove(req.params.id, function (err) {
-    if (err) return next(err);
-    res.send('Deleted successfully!');
-})
-})
+module.exports = { createProduct,getAllProduct,getOneProduct,getAllProduct,updateProduct,deleteProduct
 
-
-module.exports = router;
+}

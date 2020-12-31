@@ -1,10 +1,10 @@
 const request = require('supertest');
-const app = require('../Models/Cart.js');
+const app = require('../src/Models/Cart.js');
 
 describe('Post Endpoints', () => {
     it('should create a new post', async () => {
         const res = await request(app)
-            .post('/api/posts')
+            .post('/api/cart')
             .send({
                 userId: 1,
                user:"Thejsh",
@@ -16,8 +16,8 @@ describe('Post Endpoints', () => {
     });
 
     it('should fetch a single post', async () => {
-        const postId = 1;
-        const res = await request(app).get(`/api/posts/${postId}`);
+        const cartId = 1;
+        const res = await request(app).get(`/api/posts/${cartId}`);
         expect(res.statusCode).toEqual(200);
         expect(res.body).toHaveProperty('post');
     });
@@ -31,7 +31,7 @@ describe('Post Endpoints', () => {
 
     it('should update a post', async () => {
         const res = await request(app)
-            .put('/api/posts/1')
+            .put('/api/cart/1')
             .send({
                 userId: 1,
                 user:"Thejesh",
@@ -46,7 +46,7 @@ describe('Post Endpoints', () => {
 
     it('should return status code 500 if db constraint is violated', async () => {
         const res = await request(app)
-            .post('/api/posts')
+            .post('/api/cart')
             .send({
                 user:"Thejesh",
                items:"5",
@@ -57,13 +57,13 @@ describe('Post Endpoints', () => {
     });
 
     it('should delete a post', async () => {
-        const res = await request(app).delete('/api/posts/1');
+        const res = await request(app).delete('/api/cart/1');
         expect(res.statusCode).toEqual(204);
     });
 
     it('should respond with status code 404 if resource is not found', async () => {
-        const postId = 1;
-        const res = await request(app).get(`/api/posts/${postId}`);
+        const cartId = 1;
+        const res = await request(app).get(`/api/cart/${cartId}`);
         expect(res.statusCode).toEqual(404);
     });
 });
