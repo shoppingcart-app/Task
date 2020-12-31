@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('../Models/userReg.js');
+const app = require('../src/Models/userReg.js');
 
 describe('Post Endpoints', () => {
   it('should create a new post', async () => {
