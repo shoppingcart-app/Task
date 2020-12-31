@@ -7,8 +7,8 @@ describe('Post Endpoints', () => {
             .post('/api/posts')
             .send({
                 userId: 1,
-               user:"",
-               items:"",
+               user:"Thejsh",
+               items:"5",
 
             });
         expect(res.statusCode).toEqual(201);
@@ -34,8 +34,8 @@ describe('Post Endpoints', () => {
             .put('/api/posts/1')
             .send({
                 userId: 1,
-                user:"",
-               items:"",
+                user:"Thejesh",
+               items:"6",
                
             });
 
@@ -48,8 +48,8 @@ describe('Post Endpoints', () => {
         const res = await request(app)
             .post('/api/posts')
             .send({
-                user:"",
-               items:"",
+                user:"Thejesh",
+               items:"5",
                
             });
         expect(res.statusCode).toEqual(500);

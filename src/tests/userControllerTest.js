@@ -7,15 +7,15 @@ describe('Post Endpoints', () => {
       .post('/api/posts')
       .send({
         userId: 1,
-    firstName:"",
-    lastName:"",
-    userName:"",
-    password:"",
-    phnNo:"",
-    address:"",
-    state:"",
-    city:"",
-    pincode:"",
+    firstName:"Thejesh",
+    lastName:"Reddy",
+    userName:"thejesh98",
+    password:"thejesh98",
+    phnNo:"9963489884",
+    address:"qwerty",
+    state:"AP",
+    city:"NLR",
+    pincode:"524002",
     });
     expect(res.statusCode).toEqual(201);
     expect(res.body).toHaveProperty('post');
@@ -40,15 +40,15 @@ describe('Post Endpoints', () => {
       .put('/api/posts/1')
       .send({
         userId: 1,
-        firstName:"",
-        lastName:"",
-        userName:"",
-        password:"",
-        phnNo:"",
-        address:"",
-        state:"",
-        city:"",
-        pincode:"",
+        firstName:"updated",
+        lastName:"updated",
+        userName:"updated",
+        password:"updated",
+        phnNo:"updated",
+        address:"updated",
+        state:"updated",
+        city:"updated",
+        pincode:"updated",
       });
 
     expect(res.statusCode).toEqual(200);
@@ -60,15 +60,15 @@ describe('Post Endpoints', () => {
     const res = await request(app)
       .post('/api/posts')
       .send({
-        firstName:"",
-        lastName:"",
-        userName:"",
-        password:"",
-        phnNo:"",
-        address:"",
-        state:"",
-        city:"",
-        pincode:"",
+        firstName:"Thejesh",
+        lastName:"Reddy",
+        userName:"thejesh98",
+        password:"thejesh98",
+        phnNo:"9963489884",
+        address:"qwerty",
+        state:"AP",
+        city:"NLR",
+        pincode:"524002",
       });
     expect(res.statusCode).toEqual(500);
     expect(res.body).toHaveProperty('error');

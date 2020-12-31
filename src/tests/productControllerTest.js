@@ -7,10 +7,10 @@ describe('Post Endpoints', () => {
             .post('/api/posts')
             .send({
                 userId: 1,
-                title: "",
-                price: "",
-                description: "",
-                imageUrl: "",
+                title: "book",
+                price: "500",
+                description: "book",
+                imageUrl: "qwerty",
             });
         expect(res.statusCode).toEqual(201);
         expect(res.body).toHaveProperty('post');
@@ -35,10 +35,10 @@ describe('Post Endpoints', () => {
             .put('/api/posts/1')
             .send({
                 userId: 1,
-                title: "",
-                price: "",
-                description: "",
-                imageUrl: "",
+                title: "updated title",
+                price: "updated price",
+                description: "updated",
+                imageUrl: "updated",
             });
 
         expect(res.statusCode).toEqual(200);
@@ -50,10 +50,10 @@ describe('Post Endpoints', () => {
         const res = await request(app)
             .post('/api/posts')
             .send({
-                title: "",
-                price: "",
-                description: "",
-                imageUrl: "",
+                title: "book",
+                price: "500",
+                description: "book",
+                imageUrl: "qwerty",
             });
         expect(res.statusCode).toEqual(500);
         expect(res.body).toHaveProperty('error');
