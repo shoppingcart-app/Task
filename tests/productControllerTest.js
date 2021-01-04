@@ -65,7 +65,7 @@ describe('Post Endpoints', () => {
         expect(res.statusCode).toEqual(204);
     });
  
-    it('should respond with status code 404 if resource is not found', async () => {
+    it('should respond with status code 404 if resource not found', async () => {
         const productId = 1;
         const res = await request(app).get(`/api/products/${productId}`);
         expect(res.statusCode).toEqual(404);
