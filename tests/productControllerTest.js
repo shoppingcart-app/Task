@@ -14,20 +14,20 @@ describe('Post Endpoints', () => {
                 imageUrl: "qwerty",
             });
         expect(res.statusCode).toEqual(201);
-        expect(res.body).toHaveProperty('post');
+        expect(res.body).toHaveProperty('products');
     });
  
     it('should fetch a single post', async () => {
         const productsId = 1;
-        const res = await request(app).get(`/api/posts/${productsId}`);
+        const res = await request(app).get(`/api/products/${productsId}`);
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveProperty('post');
+        expect(res.body).toHaveProperty('products');
     });
  
     it('should fetch all posts', async () => {
-        const res = await request(app).get('/api/posts');
+        const res = await request(app).get('/api/products');
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveProperty('posts');
+        expect(res.body).toHaveProperty('products');
         expect(res.body.posts).toHaveLength(1);
     });
  
