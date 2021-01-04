@@ -77,7 +77,7 @@ describe('Post Endpoints', () => {
  
  
  
-  it('should respond with status code 404 if resource is not found', async () => {
+  it('should respond with status code 404 if resource not found', async () => {
     const regId = 1;
     const res = await request(app).get(`/api/userReg/${regId}`);
     expect(res.statusCode).toEqual(404);
