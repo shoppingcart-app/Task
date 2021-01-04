@@ -9,25 +9,25 @@ describe('Post Endpoints', () => {
             .post('/api/cart')
             .send({
                 userId: 1,
-               user:"Thejsh",
+               user:"Thejesh",
                items:"5",
  
             });
         expect(res.statusCode).toEqual(201);
-        expect(res.body).toHaveProperty('post');
+        expect(res.body).toHaveProperty('cart');
     });
  
     it('should fetch a single post', async () => {
         const cartId = 1;
-        const res = await request(app).get(`/api/posts/${cartId}`);
+        const res = await request(app).get(`/api/cart/${cartId}`);
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveProperty('post');
+        expect(res.body).toHaveProperty('cart');
     });
  
     it('should fetch all posts', async () => {
-        const res = await request(app).get('/api/posts');
+        const res = await request(app).get('/api/cart');
         expect(res.statusCode).toEqual(200);
-        expect(res.body).toHaveProperty('posts');
+        expect(res.body).toHaveProperty('cart');
         expect(res.body.posts).toHaveLength(1);
     });
  

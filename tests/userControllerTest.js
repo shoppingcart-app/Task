@@ -5,7 +5,7 @@ const app = express();
 describe('Post Endpoints', () => {
   it('should create a new post', async () => {
     const res = await request(app)
-      .post('/api/reg')
+      .post('/api/userReg')
       .send({
         userId: 1,
     firstName:"Thejesh",
@@ -19,26 +19,26 @@ describe('Post Endpoints', () => {
     pincode:"524002",
     });
     expect(res.statusCode).toEqual(201);
-    expect(res.body).toHaveProperty('post');
+    expect(res.body).toHaveProperty('userReg');
   });
  
   it('should fetch a single post', async () => {
     const regId = 1;
-    const res = await request(app).get(`/api/reg/${regId}`);
+    const res = await request(app).get(`/api/userReg/${regId}`);
     expect(res.statusCode).toEqual(200);
-    expect(res.body).toHaveProperty('post');
+    expect(res.body).toHaveProperty('userReg');
   });
  
   it('should fetch all posts', async () => {
-    const res = await request(app).get('/api/posts');
+    const res = await request(app).get('/api/userReg');
     expect(res.statusCode).toEqual(200);
-    expect(res.body).toHaveProperty('posts');
+    expect(res.body).toHaveProperty('userReg');
     expect(res.body.posts).toHaveLength(1);
   });
  
   it('should update a post', async () => {
     const res = await request(app)
-      .put('/api/reg/1')
+      .put('/api/userReg/1')
       .send({
         userId: 1,
         firstName:"updated",
@@ -53,13 +53,13 @@ describe('Post Endpoints', () => {
       });
  
     expect(res.statusCode).toEqual(200);
-    expect(res.body).toHaveProperty('post');
+    expect(res.body).toHaveProperty('userReg');
     expect(res.body.post).toHaveProperty('title', 'updated title');
   });
  
   it('should return status code 500 if db constraint is violated', async () => {
     const res = await request(app)
-      .post('/api/reg')
+      .post('/api/userReg')
       .send({
         firstName:"Thejesh",
         lastName:"Reddy",
@@ -75,14 +75,11 @@ describe('Post Endpoints', () => {
     expect(res.body).toHaveProperty('error');
   });
  
-  it('should delete a post', async () => {
-    const res = await request(app).delete('/api/reg/1');
-    expect(res.statusCode).toEqual(204);
-  });
+ 
  
   it('should respond with status code 404 if resource is not found', async () => {
     const regId = 1;
-    const res = await request(app).get(`/api/posts/${regId}`);
+    const res = await request(app).get(`/api/userReg/${regId}`);
     expect(res.statusCode).toEqual(404);
   });
 });
