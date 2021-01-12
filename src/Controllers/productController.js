@@ -1,58 +1,73 @@
-const productSchema = require('../Models/Product');
+
+
+
+constproductSchema = require('../Models/Product');
 
 //POST
-const createProduct = (product ,callback)  =>{
-  productSchema.create(product, (error, data) => {
-    if (error) {
-      return callback(error)
-    } else {
-      return callback(null,data)
-    }
+constcreateProduct = (product) => {
+  returnnewPromise(async (resolve, reject) => {
+    constProduct = newproductSchema(product);
+    awaitProduct.save(function (error) {
+      if (error) {
+        reject(error)
+      } else {
+        resolve(data)
+      }
+    })
+    /* productSchema.save(product, (error, data) => {​​​​​​​​
+        if (error) {​​​​​​​​
+          reject (error)
+        }​​​​​​​​ else {​​​​​​​​
+           resolve (data)
+        }​​​​​​​​
+      }​​​​​​​​) */
   })
 }
 
 //GET ALL
-const getAllProduct = (product ,callback)  =>{
+constgetAllProduct = (product, callback) => {
   productSchema.find(product, (error, data) => {
     if (error) {
-      return callback(error)
+      returncallback(error)
     } else {
-      return callback(null,data)
+      returncallback(null, data)
     }
   })
 }
 
 //GET One
-const getOneProduct = (product ,callback)  =>{
+constgetOneProduct = (product, callback) => {
   productSchema.findById(product, (error, data) => {
     if (error) {
-      return callback(error)
+      returncallback(error)
     } else {
-      return callback(null,data)
+      returncallback(null, data)
     }
   })
 }
 
-const updateProduct = (product ,callback)  =>{
+constupdateProduct = (product, callback) => {
   productSchema.findByIdAndUpdate(product, (error, data) => {
     if (error) {
-      return callback(error)
+      returncallback(error)
     } else {
-      return callback(null,data)
+      returncallback(null, data)
     }
   })
 }
 
-const deleteProduct = (product ,callback)  =>{
+constdeleteProduct = (product, callback) => {
   productSchema.findByIdAndRemove(product, (error, data) => {
     if (error) {
-      return callback(error)
+      returncallback(error)
     } else {
-      return callback(null,data)
+      returncallback(null, data)
     }
   })
 }
 
-module.exports = { createProduct,getAllProduct,getOneProduct,getAllProduct,updateProduct,deleteProduct
+module.exports = {
+  createProduct, getAllProduct, getOneProduct, getAllProduct, updateProduct, deleteProduct
 
 }
+
