@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const CartController = require('../controllers/cartController');
 const requireLogin = require('../middleware/requireLogin');
-const jsonParser = bodyParser.json();
 
-router.route('/cart').post( requireLogin, jsonParser, (req, res) => {
+
+router.route('/cart').post( requireLogin, (req, res) => {
     const user = req.body.user;
     const item = {
       product: req.body.product,

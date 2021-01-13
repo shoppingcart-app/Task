@@ -1,19 +1,37 @@
-const { JsonWebTokenError } = require('jsonwebtoken');
-const productController = require('../../src/controllers/productController');
-const productSchema = require('../../src/models/Product');
-describe('product controller tests', ()=>{
-    test('create product test case ', async()=>{
-        
-        const createProductData = {
-    
-            "title" : "realme 15 pro",
-            "price":"1400",
-            "description":"sjdhik",
-            "imageUrl":"dgkshdl"
+const productController = require('../../src/Controllers/productController');
+const ProductModel = require('../../src/Models/Product');
+
+describe("product controller test cases", () =>{
+    afterEach(()=>{
+        jest.resetAllMocks();
+    })
+    it("create product", async ()=> {
+        const productObj = {
+            title:'iphone',
+            price:'234343',
+            imageUrl:'sasa',
+            description:'smart phone'
         }
-        const Product = new productSchema(createProductData);
-        jest.spyOn(Product,'save').mockImplementation(() => Promise.resolve(createProductData))
-        const createProductResponse = await productController.createProduct(createProductData);
-        expect(createProductResponse.price).toBe("14000");
+        //const Product =new ProductModel(productObj);
+        jest.spyOn(ProductModel.prototype, 'save').mockImplementation((callback) => callback(null,productObj))
+       // jest.spyOn(ProductModel.prototype, 'save').mockImplementation(() => Promise.resolve(productObj));
+        const resp = await productController.createProduct(productObj).catch(err => console.log(err));
+        console.log(resp);
+    })
+
+    it("create product", async ()=> {
+        const productObj = {
+            title:'iphone',
+            price:'234343',
+            imageUrl:'sasa',
+            description:'smart phone'
+        }
+        //const Product =new ProductModel(productObj);
+        jest.spyOn(ProductModel, 'find').mockImplementation((data, cb) => cb(null,productObj))
+       // jest.spyOn(ProductModel.prototype, 'save').mockImplementation(() => Promise.resolve(productObj));
+        const resp = await productController.getAllProduct(productObj,(err,result)=>{
+            console.log(result);
+        })
+        console.log(resp);
     })
 })
