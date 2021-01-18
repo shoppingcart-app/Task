@@ -8,7 +8,7 @@ describe('Post Endpoints', () => {
         const res = await request(app)
             .post('/api/cart')
             .send({
-                -9userId: 1,
+                userId: 1,
                user:"Thejesh",
                items:"5",
  

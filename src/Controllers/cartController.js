@@ -1,16 +1,29 @@
 const cartSchema = require('../Models/Cart');
 
 //POST
-const createItem = (cart ,callback)  =>{
-  cartSchema.create(cart, (error, data) => {
-    if (error) {
-      return callback(error)
-    } else {
-      return callback(null,data)
+//POST
+const createCart = (cart) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const Cart = new cartSchema(cart);
+      console.log(cart);
+      await Cart .save(function(err,result){ 
+        if (err){ 
+          console(err);
+          reject(err);
+        } 
+        else{ 
+          console.log(result);
+          resolve(result);
+        } 
+    })
+      
+    } catch (err) {
+      console.log(err)
+      reject(err);
     }
   })
 }
-
 //GET ALL
 const getOneItem = (cart ,callback)  =>{
   cartSchema.findOne(cart, (error, data) => {
@@ -53,6 +66,6 @@ const deleteItem = (cart ,callback)  =>{
   })
 }
 
-module.exports = { createItem,getOneItemAndUpdate,getOneItem,getItemById,deleteItem
+module.exports = { createCart,getOneItemAndUpdate,getOneItem,getItemById,deleteItem
 
 }

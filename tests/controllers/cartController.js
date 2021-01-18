@@ -1,33 +1,26 @@
-const productController = require('../../src/Controllers/productController');
-const ProductModel = require('../../src/Models/Product');
+const cartController = require('../../src/Controllers/cartController');
+const cartModel = require('../../src/Models/Cart');
  
-describe("product controller test cases", () =>{
+describe("cart controller test cases", () =>{
     afterEach(()=>{
         jest.resetAllMocks();
     })
-    it("create product", async ()=> {
-        const productObj = {
-            title:'iphone',
-            price:'234343',
-            imageUrl:'sasa',
-            description:'smart phone'
+    it("create cart", async ()=> {
+        const cartObj = {
+            user:"Thejesh",
+            items:"5",
         }
-        //const Product =new ProductModel(productObj);
-        jest.spyOn(ProductModel.prototype, 'save').mockImplementation((callback) => callback(null,productObj))
-       // jest.spyOn(ProductModel.prototype, 'save').mockImplementation(() => Promise.resolve(productObj));
-        const resp = await productController.createProduct(productObj).catch(err => console.log(err));
+        jest.spyOn(cartModel.prototype, 'save').mockImplementation((callback) => callback(null,cartObj))
+        const resp = await cartController.createCart(cartObj).catch(err => console.log(err));
         console.log(resp);
     })
-    it("get all product", async ()=> {
-        const productObj = {
-            title:'iphone',
-            price:'234343',
-            description:'smart phone',
-            imageUrl:'sasa'
+    it("get all items", async ()=> {
+        const cartObj = {
+            user:"Thejesh",
+            items:"5",
         }
-        //const Product =new ProductModel(productObj);
-        jest.spyOn(ProductModel, 'find').mockImplementation((data, cb) => cb(null,productObj))
-        const resp = await productController.getAllProduct(productObj,(err,result)=>{
+        jest.spyOn(ProductModel, 'findOneAndUpdate').mockImplementation((data, cb) => cb(null,productObj))
+        const resp = await productController.getOneItemAndUpdate(productObj,(err,result)=>{
             console.log(result);
         })
         console.log(resp);
@@ -43,7 +36,7 @@ describe("product controller test cases", () =>{
         //const Product =new ProductModel(productObj);
         jest.spyOn(ProductModel, 'findById').mockImplementation((data, cb) => cb(productObj))
        // jest.spyOn(ProductModel.prototype, 'save').mockImplementation(() => Promise.resolve(productObj));
-        const resp = await productController.getOneProduct(productObj,(err,result)=>{
+        const resp = await productController.getOneItem(productObj,(err,result)=>{
             console.log(result);
         })
         console.log(resp);
@@ -59,7 +52,7 @@ describe("product controller test cases", () =>{
         //const Product =new ProductModel(productObj);
         jest.spyOn(ProductModel, 'findByIdAndUpdate').mockImplementation((data, cb) => cb(productObj))
        // jest.spyOn(ProductModel.prototype, 'save').mockImplementation(() => Promise.resolve(productObj));
-        const resp = await productController.updateProduct(productObj,(err,result)=>{
+        const resp = await productController.getItemById(productObj,(err,result)=>{
             console.log(result);
         })
         console.log(resp);
@@ -75,7 +68,7 @@ describe("product controller test cases", () =>{
         //const Product =new ProductModel(productObj);
         jest.spyOn(ProductModel, 'findByIdAndRemove').mockImplementation((data, cb) => cb(productObj))
        // jest.spyOn(ProductModel.prototype, 'save').mockImplementation(() => Promise.resolve(productObj));
-        const resp = await productController.deleteProduct(productObj,(err,result)=>{
+        const resp = await productController.deleteItem(productObj,(err,result)=>{
             console.log(result);
         })
         console.log(resp);
