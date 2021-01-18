@@ -36,7 +36,7 @@ describe("product controller test cases", () =>{
     it("get one product", async ()=> {
         const productObj = {
             title:'iphone',
-            price:'234343',
+            price:'234343',                                                                                                                                                    
             description:'smart phone',
             imageUrl:'sasa'
         }
