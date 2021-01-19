@@ -64,6 +64,17 @@ describe("product controller test cases", () =>{
         })
         console.log(resp);
     })
+    it("error tests", async ()=> {
+        const productObj = {
+            title:'iphone',
+            price:'234343',
+            imageUrl:'sasa',
+            description:''
+        }
+        jest.spyOn(ProductModel.prototype, 'save').mockImplementation((error) =>  cb(error))
+        const resp = await productController.createProduct(productObj).catch(error => console.log(error)).expect(error).toThrow('Error: not created');
+        console.log(resp);
+    })
  
     it("delete product", async ()=> {
         const productObj = {
