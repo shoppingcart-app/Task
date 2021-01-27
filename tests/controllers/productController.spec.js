@@ -12,12 +12,14 @@ describe("product controller test cases", () =>{
             imageUrl:'sasa',
             description:'smart phone'
         }
-        //const Product =new ProductModel(productObj);
         jest.spyOn(ProductModel.prototype, 'save').mockImplementation((callback) => callback(null,productObj))
-       // jest.spyOn(ProductModel.prototype, 'save').mockImplementation(() => Promise.resolve(productObj));
         const resp = await productController.createProduct(productObj).catch(err => console.log(err));
         console.log(resp);
+        expect(productObj.price).toBe(resp.price);
     })
+ 
+    
+ 
     it("get all product", async ()=> {
         const productObj = {
             title:'iphone',
@@ -25,28 +27,27 @@ describe("product controller test cases", () =>{
             description:'smart phone',
             imageUrl:'sasa'
         }
-        //const Product =new ProductModel(productObj);
         jest.spyOn(ProductModel, 'find').mockImplementation((data, cb) => cb(null,productObj))
         const resp = await productController.getAllProduct(productObj,(err,result)=>{
             console.log(result);
         })
         console.log(resp);
+        expect(productObj.result).toBe(resp);
     })
  
     it("get one product", async ()=> {
         const productObj = {
             title:'iphone',
-            price:'234343',                                                                                                                                                    
+            price:'234343',
             description:'smart phone',
             imageUrl:'sasa'
         }
-        //const Product =new ProductModel(productObj);
         jest.spyOn(ProductModel, 'findById').mockImplementation((data, cb) => cb(productObj))
-       // jest.spyOn(ProductModel.prototype, 'save').mockImplementation(() => Promise.resolve(productObj));
         const resp = await productController.getOneProduct(productObj,(err,result)=>{
             console.log(result);
         })
         console.log(resp);
+        expect(productObj.result).toBe(resp);
     })
  
     it("update product", async ()=> {
@@ -56,24 +57,12 @@ describe("product controller test cases", () =>{
             description:'smart phone',
             imageUrl:'sasa'
         }
-        //const Product =new ProductModel(productObj);
         jest.spyOn(ProductModel, 'findByIdAndUpdate').mockImplementation((data, cb) => cb(productObj))
-       // jest.spyOn(ProductModel.prototype, 'save').mockImplementation(() => Promise.resolve(productObj));
         const resp = await productController.updateProduct(productObj,(err,result)=>{
             console.log(result);
         })
         console.log(resp);
-    })
-    it("error tests", async ()=> {
-        const productObj = {
-            title:'iphone',
-            price:'234343',
-            imageUrl:'sasa',
-            description:''
-        }
-        jest.spyOn(ProductModel.prototype, 'save').mockImplementation((error) =>  cb(error))
-        const resp = await productController.createProduct(productObj).catch(error => console.log(error)).expect(error).toThrow('Error: not created');
-        console.log(resp);
+        expect(productObj.result).toBe(resp);
     })
  
     it("delete product", async ()=> {
@@ -83,12 +72,12 @@ describe("product controller test cases", () =>{
             description:'smart phone',
             imageUrl:'sasa'
         }
-        //const Product =new ProductModel(productObj);
+        
         jest.spyOn(ProductModel, 'findByIdAndRemove').mockImplementation((data, cb) => cb(productObj))
-       // jest.spyOn(ProductModel.prototype, 'save').mockImplementation(() => Promise.resolve(productObj));
         const resp = await productController.deleteProduct(productObj,(err,result)=>{
             console.log(result);
         })
         console.log(resp);
+        expect(productObj.result).toBe(resp);
     })
 })
