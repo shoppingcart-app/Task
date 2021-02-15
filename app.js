@@ -1,20 +1,24 @@
-const express=require('express');
-const mongoose=require('mongoose');
-const cors=require('cors');
-const app=express();
-const productController=require('./src/Controllers/productController.js')
-const userController=require('./src/Controllers/userController.js');
-const cartController=require('./src/Controllers/cartController.js');
+var express=require('express');
+var mongoose=require('mongoose');
+var cors=require('cors');
+var app=express();
 
-const config=require('./src/Config');
+var bookController=require('./Controllers/bookController.js');
+var userController=require('./Controllers/userController.js');
+var cartController=require('./Controllers/shoppingCartController');
+var orderController=require('./Controllers/ordersController.js');
+var config=require('./Config');
 app.set('port',4000);
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use('/api',userController);
-app.use('/api',productController);
-app.use('/api',cartController);
+const swaggerUi = require('swagger-ui-express'),
+swaggerDocument = require('./swagger.json');
 
+app.use('/book',bookController);
+app.use('/user',userController);
+app.use('/cart',cartController);
+app.use('/order',orderController);
+app.use('/uploads',express.static(__dirname+'/uploads'));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 mongoose.connect(config.getDbConnectionString(),{useCreateIndex:true,useNewUrlParser:true,useUnifiedTopology:true,useFindAndModify:false});
 const db=mongoose.connection;
 db.on('error',console.error.bind(console,'connection error:'))
