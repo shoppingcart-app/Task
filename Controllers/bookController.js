@@ -4,7 +4,6 @@ var books=require('../Models/book');
 var category=require('../Models/category');
 var author=require('../Models/author');
 const multer = require('multer');
-var path =require('path');
 var fs= require('fs');
 var router=express.Router();
 router.use(bodyParser.json());
@@ -176,33 +175,7 @@ router.post('/deleteAuthor/:id',(req,res)=>{
         res.send({message:true});
     }).catch(err=>res.send({message:err.message}));
 });
-router.get('/search/:name',(req,res)=>{
-        books.find({"bookName":{$regex : `^${req.params.name}.*` , $options: 'si' }}).then((searchedBooks)=>{
-            if(searchedBooks.length>0){
-                res.send(searchedBooks);
-            }else{
-                books.find({"category":{$regex : `^${req.params.name}.*` , $options: 'si' }}).then((searchedBooks)=>{
-                    if(searchedBooks.length>0){
-                        res.send(searchedBooks);
-                    }else{
-                        books.find({"author":{$regex : `^${req.params.name}.*` , $options: 'si' }}).then((searchedBooks)=>{
-                            res.send(searchedBooks);
-                         }
-                         ).catch((err)=>{
-                             res.send(err.message);
-                         });
-                    }
-                }).catch((err)=>{
-                    res.send(err.message);
-                });
-            }
-            
-        }).catch((err)=>{
-            res.send(err.message);
-        });
-    
-  
-});
+
 router.put('/updateBook',upload.single('imageURL'),async(req,res)=>{
     books.findOne({_id:req.body._id},(err,book)=>{
         if(err){
