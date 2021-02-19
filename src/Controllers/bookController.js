@@ -1,8 +1,8 @@
 var express=require('express');
 var bodyParser=require('body-parser');
-var books=require('../Models/book');
-var category=require('../Models/category');
-var author=require('../Models/author');
+var books=require('../../src/Models/book');
+var category=require('../../src/Models/category');
+var author=require('../../src/Models/author');
 const multer = require('multer');
 var fs= require('fs');
 var router=express.Router();

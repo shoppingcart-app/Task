@@ -1,8 +1,8 @@
 var express=require('express');
 var bodyParser=require('body-parser');
 var router=express.Router();
-var orders=require('../Models/orders.js');
-var cart=require('../Models/shoppingCart.js');
+var orders=require('../../src/Models/orders');
+var cart=require('../../src/Models/shoppingCart');
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended:false}));
 router.post('/placeOrder',(req,res)=>{

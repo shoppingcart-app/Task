@@ -1,8 +1,8 @@
 var express=require('express');
 var bodyParser=require('body-parser');
-var books=require('../Models/book');
+var books=require('../../src/Models/book');
 var router=express.Router();
-var cart=require('../Models/shoppingCart');
+var cart=require('../../src/Models/shoppingCart');
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended:false}));
 router.post('/addBook',(req,res)=>{

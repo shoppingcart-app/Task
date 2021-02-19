@@ -3,11 +3,11 @@ var mongoose=require('mongoose');
 var cors=require('cors');
 var app=express();
 
-var bookController=require('./Controllers/bookController.js');
-var userController=require('./Controllers/userController.js');
-var cartController=require('./Controllers/shoppingCartController');
-var orderController=require('./Controllers/ordersController.js');
-var config=require('./Config');
+var bookController=require('./src/Controllers/bookController');
+var userController=require('./src/Controllers/userController.js');
+var cartController=require('./src/Controllers/shoppingCartController');
+var orderController=require('./src/Controllers/ordersController.js');
+var config=require('./src/Config');
 app.set('port',4000);
 app.use(cors());
 const swaggerUi = require('swagger-ui-express'),

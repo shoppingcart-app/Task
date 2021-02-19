@@ -1,7 +1,7 @@
 var express=require('express');
 var bodyParser=require('body-parser');
-var userReg=require('../Models/userReg.js');
-var config=require('../Config/secret');
+var userReg=require('../../src/Models/userReg');
+var config=require('../../src/Config');
 var jwt=require('jsonwebtoken');
 var bcrypt=require('bcryptjs');
 var router=express.Router();
